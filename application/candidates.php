@@ -94,7 +94,7 @@ if ($isConnected) {
 <div class="row-striped row-hover">
 <?php 	
 foreach($candidates as $candidate) {
-	$candidateQuestions = $candidateQuestionBo->getByFilters(array("cas_candidature_id" => $candidate["can_id"]));
+	$candidateQuestions = $candidateQuestionBo->getByFilters(array("cas_candidature_id" => $candidate["can_id"], "cqu_election" => "eur_2019"));
 	
 	$answered = 0;
 	foreach($candidateQuestions as $question) {
@@ -112,7 +112,6 @@ foreach($candidates as $candidate) {
 	else {
 		$answerClass = "some-answered";
 	}
-	
 ?>
 	<div class="row data <?php echo $answerClass; ?> <?php echo str_replace(",", " ", $candidate["can_positions"]); ?> <?php echo $candidate["can_sex"]; ?>">
 		<div class="col-md-3">
