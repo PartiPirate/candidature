@@ -128,7 +128,7 @@ Nous l'avons bien pris en compte et nous reviendrons vers vous très prochaineme
 Piratement,
 L'équipe Élections";
 	
-	$subject = "Votre Candidature aux elections européennes de 2019 au nom du Parti Pirate";
+	$subject = "Votre Candidature aux elections municipales de 2020 au nom du Parti Pirate";
 	
 	$mail = getMailInstance();
 	

@@ -4,7 +4,7 @@ var showDonationsGauge = function(autoRetry){
     }
 
     $.ajax({
-        url: 'https://don.partipirate.org/api/getGauge.php?from_date=2017-01-01&to_date=2020-01-01&amount_path=project%3EadditionalDonation&search=%22project%22:%7B%22code%22:%22BUD_ELECTION_2019%22',
+        url: 'https://don.partipirate.org/api/getGauge.php?from_date=2019-01-01&to_date=2021-01-01&amount_path=project%3EadditionalDonation&search=%22project%22:%7B%22code%22:%22BUD_ELECTION_2020%22',
         success: function(data){
             var allObjectives = [
                 {"value": 27000, "description": "Nous pouvons imprimer 4&nbsp;600&nbsp;000 bulletins, soit pour environ 10&nbsp;% de l'électorat."},
