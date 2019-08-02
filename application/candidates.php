@@ -1,5 +1,5 @@
 <?php /*
-	Copyright 2015 Cédric Levieux, Parti Pirate
+	Copyright 2015-2019 Cédric Levieux, Parti Pirate
 
 	This file is part of Recrutement.
 
@@ -26,7 +26,7 @@ $candidateQuestionBo = CandidateQuestionBo::newInstance($connection, $config);
 $candidates = array();
 
 if ($isConnected) {
-	$candidates = $candidateBo->getByFilters(array("can_election" => "eur_2019"));
+	$candidates = $candidateBo->getByFilters(array("can_election" => "mun_2020"));
 }
 
 ?>
@@ -94,7 +94,7 @@ if ($isConnected) {
 <div class="row-striped row-hover">
 <?php 	
 foreach($candidates as $candidate) {
-	$candidateQuestions = $candidateQuestionBo->getByFilters(array("cas_candidature_id" => $candidate["can_id"], "cqu_election" => "eur_2019"));
+	$candidateQuestions = $candidateQuestionBo->getByFilters(array("cas_candidature_id" => $candidate["can_id"], "cqu_election" => "mun_2020"));
 	
 	$answered = 0;
 	foreach($candidateQuestions as $question) {

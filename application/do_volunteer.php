@@ -1,4 +1,22 @@
 <?php
+/*
+	Copyright 2015-2019 Cédric Levieux, Parti Pirate
+
+	This file is part of Recrutement.
+
+    Recrutement is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Recrutement is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Recrutement.  If not, see <http://www.gnu.org/licenses/>.
+*/
 // ini_set('display_errors', 1);
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
@@ -122,7 +140,7 @@ else {
 	// Send mail
 	$mailMessage = "Bonjour
 
-Vous avez manifesté votre volonté de participer aux élections européennes de 2019 sous l'étiquette du Parti Pirate.
+Vous avez manifesté votre volonté de participer aux élections municipales de 2020 sous l'étiquette du Parti Pirate.
 Nous l'avons bien pris en compte et nous reviendrons vers vous très prochainement afin d'échanger au sujet de cette candidature.
 
 Piratement,
@@ -141,8 +159,9 @@ L'équipe Élections";
 	
 	$mail->addAddress($email);
 	
-	$mail->SMTPSecure = "ssl";
+//	$mail->SMTPSecure = "ssl";
 	if ($mail->send()) {
+		$data["mail"] = true;
 		//		echo "Send SN Mails<br/>";
 	}
 
@@ -151,7 +170,7 @@ L'équipe Élections";
 	$mail->setFrom($config["smtp"]["from.address"], $config["smtp"]["from.name"]);
 	$mail->addReplyTo($config["smtp"]["from.address"], $config["smtp"]["from.name"]);
 	
-	$subject = "[2019] Un-e nouvel-le candidat-e";
+	$subject = "[2020] Un-e nouvel-le candidat-e";
 	$mailMessage = "La personne " . $candidature["can_lastname"] . " " . $candidature["can_firstname"] . " a fait acte de candidature.
 
 Informations complémentaires :
@@ -179,9 +198,9 @@ Un bot qui distribue des tâches";
 	$mail->msgHTML(str_replace("\n", "<br>\n", utf8_decode($mailMessage)));
 	$mail->AltBody = utf8_decode($mailMessage);
 	
-	$mail->addAddress("contact@partipirate.org", "Equipe Elections");
-	
-	$mail->SMTPSecure = "ssl";
+	$mail->addAddress("municipales@mail.partipirate.org", "Equipe Elections");
+
+//	$mail->SMTPSecure = "ssl";
 	if ($mail->send()) {
 		//		echo "Send SN Mails<br/>";
 		$data["sent"] = "sent";

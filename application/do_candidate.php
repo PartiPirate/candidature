@@ -1,20 +1,20 @@
 <?php /*
-	Copyright 2015 Cédric Levieux, Parti Pirate
+	Copyright 2015-2019 Cédric Levieux, Parti Pirate
 
-	This file is part of Congressus.
+	This file is part of Recrutement.
 
-    Congressus is free software: you can redistribute it and/or modify
+    Recrutement is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    Congressus is distributed in the hope that it will be useful,
+    Recrutement is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with Congressus.  If not, see <http://www.gnu.org/licenses/>.
+    along with Recrutement.  If not, see <http://www.gnu.org/licenses/>.
 */
 include_once("config/database.php");
 require_once("engine/utils/FormUtils.php");
@@ -35,7 +35,7 @@ if (SessionUtils::getUserId($_SESSION)) {
 	
 	$candidateQuestionBo = CandidateQuestionBo::newInstance($connection, $config);
 	$candidateAnswerBo = CandidateAnswerBo::newInstance($connection, $config);
-	$candidateQuestions = $candidateQuestionBo->getByFilters(array("cas_candidature_id" => $_REQUEST["cas_candidature_id"]));
+	$candidateQuestions = $candidateQuestionBo->getByFilters(array("cas_candidature_id" => intval($_REQUEST["cas_candidature_id"]), "cqu_election" => "mun_2020"));
 	
 	//$answers = array();
 	

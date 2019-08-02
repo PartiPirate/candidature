@@ -1,5 +1,5 @@
 <?php /*
-	Copyright 2015 Cédric Levieux, Parti Pirate
+	Copyright 2015-2019 Cédric Levieux, Parti Pirate
 
 	This file is part of Recrutement.
 
@@ -110,16 +110,52 @@ if ($isConnected) {
 
 			<?php 
 				foreach($candidateQuestions as $question) {
+					if ($question["cqu_type"] == "string") {
 			?>
 
 			<div class="form-group">
-				<label class="col-md-12 control-label" for="question-<?php echo $question["cqu_id"]; ?>"><?php echo utf8_encode($question["cqu_question"]); ?></label>
-				<div class="col-md-12">
-					<textarea class="form-control answer" id="question-<?php echo $question["cqu_id"]; ?>" name="question-<?php echo $question["cqu_id"]; ?>"><?php echo $question["cas_answer"]; ?></textarea>
+				<label class="col-md-4 control-label" for="question-<?=$question["cqu_id"]?>"><?php echo utf8_encode($question["cqu_question"]); ?></label>
+				<div class="col-md-8">
+					<textarea class="form-control answer" id="question-<?=$question["cqu_id"]?>" name="question-<?=$question["cqu_id"]?>"><?php echo $question["cas_answer"]; ?></textarea>
+				</div>
+
+			</div>
+			<?php 
+					}
+					else if ($question["cqu_type"] == "enum") {
+						$enum = explode(",", $question["cqu_enumeration"]);
+			?>
+
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="question-<?=$question["cqu_id"]?>"><?php echo utf8_encode($question["cqu_question"]); ?></label>
+
+				<div class="col-md-4">
+					<select id="question-<?=$question["cqu_id"]?>" name="question-<?=$question["cqu_id"]?>" class="form-control">
+						<?php	if (!$question["cas_answer"]) {?>
+						<option value="">Choisir une valeur</option>
+						<?php	} ?>
+						<?php	foreach($enum as $value) { ?>
+						<option value="<?=$value?>" <?php if ($value == $question["cas_answer"]) { echo "selected=selected"; }?> ><?=$value?></option>
+						<?php	} ?>
+					</select>
 				</div>
 			</div>
-
 			<?php 
+					}
+					else if ($question["cqu_type"] == "boolean") {
+			?>
+
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="question-<?=$question["cqu_id"]?>"><?php echo utf8_encode($question["cqu_question"]); ?></label>
+
+				<div class="col-md-4">
+				    <label class="checkbox-inline" for="question-<?=$question["cqu_id"]?>">
+						<input type="checkbox" name="question-<?=$question["cqu_id"]?>" id="question-<?=$question["cqu_id"]?>" value="true" style="position: relative;" <?php if ($question["cas_answer"]) { echo "checked=checked"; }?> >
+				    </label>
+				</div>
+			</div>
+			<?php 
+					}
 				}
 			?>
 
