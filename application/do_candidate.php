@@ -35,7 +35,7 @@ if (SessionUtils::getUserId($_SESSION)) {
 	
 	$candidateQuestionBo = CandidateQuestionBo::newInstance($connection, $config);
 	$candidateAnswerBo = CandidateAnswerBo::newInstance($connection, $config);
-	$candidateQuestions = $candidateQuestionBo->getByFilters(array("cas_candidature_id" => intval($_REQUEST["cas_candidature_id"]), "cqu_election" => "mun_2020"));
+	$candidateQuestions = $candidateQuestionBo->getByFilters(array("cas_candidature_id" => intval($_REQUEST["cas_candidature_id"]), "cqu_election" => $config["election"]));
 	
 	//$answers = array();
 	

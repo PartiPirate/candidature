@@ -26,7 +26,7 @@ $candidateQuestionBo = CandidateQuestionBo::newInstance($connection, $config);
 $candidates = array();
 
 if ($isConnected) {
-	$candidates = $candidateBo->getByFilters(array("can_election" => "mun_2020"));
+	$candidates = $candidateBo->getByFilters(array("can_election" => $config["election"]));
 }
 
 ?>
@@ -94,7 +94,7 @@ if ($isConnected) {
 <div class="row-striped row-hover">
 <?php 	
 foreach($candidates as $candidate) {
-	$candidateQuestions = $candidateQuestionBo->getByFilters(array("cas_candidature_id" => $candidate["can_id"], "cqu_election" => "mun_2020"));
+	$candidateQuestions = $candidateQuestionBo->getByFilters(array("cas_candidature_id" => $candidate["can_id"], "cqu_election" => $config["election"]));
 	
 	$answered = 0;
 	foreach($candidateQuestions as $question) {
