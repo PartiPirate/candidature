@@ -1,5 +1,7 @@
-var donateUrl = "https://don.partipirate.org";
-var joinUrl = "https://adhesion.partipirate.org";
+/* global $ */
+
+const donateUrl = "https://don.partipirate.org";
+const joinUrl = "https://adhesion.partipirate.org";
 
 $(function() {
 //	function changeStatus(id, status, message) {
@@ -186,6 +188,100 @@ $(function() {
 		event.preventDefault();
 		window.location.replace(donateUrl);
 	});
+
+	$("#adherentButtons button").click(function() {
+		const value = $(this).val();
+
+		$("#adherentButtons button").removeClass("active");
+		
+		switch(value) {
+			case "true":
+				$("#not-member-disclaimer-div").hide();
+				break;
+			case "false":
+				$("#not-member-disclaimer-div").show();
+				break;
+			default:
+				break;
+		}
+
+		if ($(this).hasClass("active")) {
+			$(this).removeClass("active");
+		} else {
+			$(this).addClass("active");
+		}
+
+		$("#adherentInput").val(value);
+	});
+
+	$("#listsButtons button").click(function() {
+		const value = $(this).val();
+
+		$("#listsButtons button").removeClass("active");
+
+		switch(value) {
+			case "true":
+				$("#other-div").show();
+				break;
+			case "false":
+				$("#other-div").hide();
+				break;
+			default:
+				break;
+		}
+
+		if ($(this).hasClass("active")) {
+			$(this).removeClass("active");
+		} else {
+			$(this).addClass("active");
+		}
+
+		$("#listsInput").val(value);
+	});
+
+	$("#otherCityButtons button").click(function() {
+		const value = $(this).val();
+
+		$("#otherCityButtons button").removeClass("active");
+
+		switch(value) {
+			case "true":
+				$("#other-city-div").show();
+				break;
+			case "false":
+				$("#other-city-div").hide();
+				break;
+			default:
+				break;
+		}
+
+		if ($(this).hasClass("active")) {
+			$(this).removeClass("active");
+		} else {
+			$(this).addClass("active");
+		}
+
+		$("#otherCityChoiceInput").val(value);
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	$("input[type=checkbox]").click(function(event) {
 		if ($(this).attr("checked")) {

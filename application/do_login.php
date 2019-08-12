@@ -65,7 +65,7 @@ if ($member) {
 //		error_log(print_r($fixation, true));
 		
 		// 28 is the current election team theme ID in personae
-		if ($fixation["fix_theme_id"] == 72) {
+		if ($fixation["fix_theme_id"] == 113) {
 			$isElection = true;
 			break;
 		}

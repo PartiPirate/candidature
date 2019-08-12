@@ -69,17 +69,23 @@ if ($isConnected) {
 <br>
 
 <div class="row header">
-	<div class="col-md-3">
+	<div class="col-md-2">
 		Identité (et genre civil)
 	</div>
 	<div class="col-md-2">
 		Téléphone
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		Mail
 	</div>
 	<div class="col-md-2">
 		Positions
+	</div>
+	<div class="col-md-2">
+		Ville
+	</div>
+	<div class="col-md-2">
+		Investi-e
 	</div>
 	<!--
 	<div class="col-md-2">
@@ -114,7 +120,7 @@ foreach($candidates as $candidate) {
 	}
 ?>
 	<div class="row data <?php echo $answerClass; ?> <?php echo str_replace(",", " ", $candidate["can_positions"]); ?> <?php echo $candidate["can_sex"]; ?>">
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<a href="candidate.php?id=<?php echo $candidate["can_id"]?>"><?php echo $candidate["can_firstname"]; ?> <?php echo $candidate["can_lastname"]; ?></a>
 			
 			<?php 
@@ -135,7 +141,7 @@ foreach($candidates as $candidate) {
 		<div class="col-md-2">
 			<?php echo $candidate["can_telephone"]; ?>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<?php echo $candidate["can_mail"]; ?>
 		</div>
 		<div class="col-md-2">
@@ -153,6 +159,57 @@ foreach($candidates as $candidate) {
 				echo implode(", ", $tPositions); 
 			?>
 		</div>
+		<div class="col-md-2">
+			<?php 
+
+foreach($candidateQuestions as $candidateQuestion) {
+	if ($candidateQuestion["cqu_id"] != 27) continue;
+
+//	print_r($candidateQuestion);
+
+	echo $candidateQuestion["cas_answer"];
+/*
+	if ($candidateQuestion["cas_answer"] == "true") {
+		echo "<p class='text-success'>";
+		echo "Investi-e";
+		echo "</p>";
+	}
+	else {
+		echo "<p class='text-danger'>";
+		echo "en attente";
+		echo "</p>";
+	}
+*/
+	break;
+}
+
+			?>
+		</div>
+		<div class="col-md-2">
+			<?php 
+
+foreach($candidateQuestions as $candidateQuestion) {
+	if ($candidateQuestion["cqu_id"] != 23) continue;
+
+//	print_r($candidateQuestion);
+
+	if ($candidateQuestion["cas_answer"] == "true") {
+		echo "<p class='text-success'>";
+		echo "Investi-e";
+		echo "</p>";
+	}
+	else {
+		echo "<p class='text-danger'>";
+		echo "en attente";
+		echo "</p>";
+	}
+
+	break;
+}
+
+			?>
+		</div>
+		
 		<!--
 		<div class="col-md-2">
 			<?php 

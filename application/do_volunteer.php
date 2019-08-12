@@ -36,11 +36,13 @@ include_once("config/mail.php");
 include_once("language/language.php");
 require_once("engine/bo/AddressBo.php");
 require_once("engine/bo/DocumentBo.php");
+require_once("engine/bo/CandidateAnswerBo.php");
 require_once("engine/bo/UserBo.php");
 
 $connection = openConnection();
 $addressBo = AddressBo::newInstance($connection);
 $documentBo = DocumentBo::newInstance($connection);
+$candidateAnswerBo = CandidateAnswerBo::newInstance($connection, $config);
 
 $data = array();
 
@@ -136,6 +138,19 @@ else {
 	$addressBo->addCandidature($candidature);
 
 	$data["candidature_id"] = $candidature["can_id"];
+
+	/* CODE SPECIFIQUE */
+	$answer = array("cas_candidature_id" => $candidature["can_id"], "cas_question_id" => "24", "cas_answer" => $_REQUEST["faith"]);
+	$candidateAnswerBo->save($answer);
+
+	$answer = array("cas_candidature_id" => $candidature["can_id"], "cas_question_id" => "26", "cas_answer" => $_REQUEST["adherentInput"]);
+	$candidateAnswerBo->save($answer);
+
+	$answer = array("cas_candidature_id" => $candidature["can_id"], "cas_question_id" => "25", "cas_answer" => (($_REQUEST["listsInput"] == "true") ? ("Oui : " . $_REQUEST["listInput"]) : "Non"));
+	$candidateAnswerBo->save($answer);
+
+	$answer = array("cas_candidature_id" => $candidature["can_id"], "cas_question_id" => "27", "cas_answer" => (($_REQUEST["otherCityChoiceInput"] == "true") ? ($_REQUEST["otherCityInput"]) : $_REQUEST["add_city"]));
+	$candidateAnswerBo->save($answer);
 
 	// Send mail
 	$mailMessage = "Bonjour
